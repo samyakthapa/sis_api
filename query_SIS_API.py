@@ -52,7 +52,7 @@ def return_all_department_mnemonics(year, semester):
     return mnemonics_list
 
 
-def return_all_courses_from_department(year, semester, department):
+def return_all_courses_from_department(year, semester, department, skip_grad=True):
     # Input handling
     semester = semester.lower()  # ensures "Spring" is treated the same as "SPRING" and "spring"
     validate_input(year, semester)
@@ -87,7 +87,7 @@ def return_all_courses_from_department(year, semester, department):
         chunk["subject"] = entry["subject"]
         chunk["catalog_nbr"] = entry["catalog_nbr"]
 
-        if int(chunk["catalog_nbr"]) > 4999:
+        if int(chunk["catalog_nbr"]) > 4999 and skip_grad:
             break
 
         chunk["descr"] = entry["descr"]
